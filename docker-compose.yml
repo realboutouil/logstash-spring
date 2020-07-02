@@ -27,39 +27,39 @@ services:
       - "38000:38000"
     build: service-b/
 
-#  elasticsearch:
-#    restart: always
-#    build: elasticsearch/
-#    volumes:
-#      - $PWD/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-#    ports:
-#      - "9200:9200"
-#      - "9300:9300"
-#    environment:
-#      ES_JAVA_OPTS: "-Xmx1024m -Xms256m"
-#    container_name: elk-es
-#
-#  logstash:
-#    restart: always
-#    build: logstash/
-#    volumes:
-#      - $PWD/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
-#      - $PWD/logstash/pipeline:/usr/share/logstash/pipeline
-#    ports:
-#      - "9600:9600"
-#    environment:
-#      LS_JAVA_OPTS: "-Xmx1024m -Xms256m"
-#    container_name: elk-logstash
-#    depends_on:
-#      - elasticsearch
-#
-#  kibana:
-#    restart: always
-#    build: kibana/
-#    volumes:
-#      - $PWD/kibana/config/:/usr/share/kibana/config
-#    ports:
-#      - "5601:5601"
-#    container_name: elk-kibana
-#    depends_on:
-#      - elasticsearch
+  elasticsearch:
+    restart: always
+    build: elasticsearch/
+    volumes:
+      - $PWD/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx1024m -Xms256m"
+    container_name: elk-es
+
+  logstash:
+    restart: always
+    build: logstash/
+    volumes:
+      - $PWD/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - $PWD/logstash/pipeline:/usr/share/logstash/pipeline
+    ports:
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx1024m -Xms256m"
+    container_name: elk-logstash
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    restart: always
+    build: kibana/
+    volumes:
+      - $PWD/kibana/config/:/usr/share/kibana/config
+    ports:
+      - "5601:5601"
+    container_name: elk-kibana
+    depends_on:
+      - elasticsearch

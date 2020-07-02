@@ -25,4 +25,4 @@ VOLUME /app/config
 
 ENTRYPOINT ["dockerize", "-timeout", "5m", "-wait", "tcp://rabbitmq:5672","java","-Djava.security.egd=file:/dev/./urandom", "-jar","/app/app.jar"]
 
-EXPOSE 8080
+EXPOSE 38000

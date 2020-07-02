@@ -8,6 +8,7 @@ COPY src ./src/
 RUN mvn -e -B package
 
 FROM adoptopenjdk/openjdk8-openj9:alpine-jre
+
 WORKDIR /app
 
 COPY --from=MAVEN_BUILD /build/target/*.jar /app/app.jar

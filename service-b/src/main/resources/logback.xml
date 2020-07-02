@@ -20,18 +20,24 @@
 
     <appender name="AMQP"
               class="pl.piomin.services.api.AmqpLogbackAppender">
-        <layout>
-            <pattern>
-                {
-                "time": "%date{ISO8601}",
-                "thread": "%thread",
-                "level": "%level",
-                "class": "%logger{36}",
-                "message": "%message"
-                "serviceName": "${serviceName}"
-                }
-            </pattern>
-        </layout>
+        <!-- layout is required but ignored as using the encoder for the AMQP message body -->
+        <layout><pattern><![CDATA[ %message ]]></pattern></layout>
+
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"serviceName": "${serviceName}"}</customFields>
+        </encoder>
+<!--        <layout>-->
+<!--            <pattern>-->
+<!--                {-->
+<!--                "time": "%date{ISO8601}",-->
+<!--                "thread": "%thread",-->
+<!--                "level": "%level",-->
+<!--                "class": "%logger{36}",-->
+<!--                "message": "%message"-->
+<!--                "serviceName": "${serviceName}"-->
+<!--                }-->
+<!--            </pattern>-->
+<!--        </layout>-->
 
         <!-- RabbitMQ connection -->
         <host>${rabbitMQHost}</host>

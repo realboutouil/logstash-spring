@@ -26,18 +26,6 @@
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <customFields>{"serviceName": "${serviceName}"}</customFields>
         </encoder>
-        <!--        <layout>-->
-        <!--            <pattern>-->
-        <!--                {-->
-        <!--                "time": "%date{ISO8601}",-->
-        <!--                "thread": "%thread",-->
-        <!--                "level": "%level",-->
-        <!--                "class": "%logger{36}",-->
-        <!--                "message": "%message"-->
-        <!--                "serviceName": "${serviceName}"-->
-        <!--                }-->
-        <!--            </pattern>-->
-        <!--        </layout>-->
 
         <!-- RabbitMQ connection -->
         <host>${rabbitMQHost}</host>

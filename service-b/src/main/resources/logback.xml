@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="rabbitMQHost" source="logback.amqp.host" defaultValue="localhost"/>
+    <springProperty scope="context" name="rabbitMQPort" source="logback.amqp.port" defaultValue="5672"/>
+    <springProperty scope="context" name="rabbitMQUsername" source="spring.rabbitmq.username"/>
+    <springProperty scope="context" name="rabbitMQPassword" source="spring.rabbitmq.password"/>
+    <springProperty scope="context" name="rabbitMQExchangeName" source="logback.amqp.exchange.name"
+                    defaultValue="mpi.tradedev"/>
+    <springProperty scope="context" name="rabbitMQRoutingKey" source="logback.amqp.routing.key"
+                    defaultValue="mpi.tradedev.logging"/>
+    <springProperty scope="context" name="serviceName" source="spring.application.name"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread, %X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="AMQP" class="pl.piomin.services.api.AmqpLogbackAppender">
+        <!-- layout is required but ignored as using the encoder for the AMQP message body -->
+        <layout>
+            <pattern><![CDATA[ %level ]]></pattern>
+        </layout>
+
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"serviceName": "${serviceName}"}</customFields>
+        </encoder>
+
+        <!-- RabbitMQ connection -->
+        <host>${rabbitMQHost}</host>
+        <port>${rabbitMQPort}</port>
+        <username>${rabbitMQUsername}</username>
+        <password>${rabbitMQPassword}</password>
+        <exchangeName>${rabbitMQExchangeName}</exchangeName>
+        <routingKeyPattern>${rabbitMQRoutingKey}</routingKeyPattern>
+
+        <declareExchange>true</declareExchange>
+        <exchangeType>topic</exchangeType>
+        <generateId>true</generateId>
+        <charset>UTF-8</charset>
+        <durable>true</durable>
+        <deliveryMode>PERSISTENT</deliveryMode>
+
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="AMQP"/>
+    </root>
+</configuration>

@@ -1,0 +1,69 @@
+version: '3.8'
+services:
+
+  rabbitmq: # login guest:guest
+    image: rabbitmq:management
+    restart: always
+    ports:
+      - '4369:4369'
+      - '5671:5671'
+      - '5672:5672'
+      - '25672:25672'
+      - '15671:15671'
+      - '15672:15672'
+    tty: true
+
+  service-a:
+    image: service-a
+    container_name: service-a
+    ports:
+      - "39000:39000"
+    build: service-a/
+    depends_on:
+      - rabbitmq
+
+  service-b:
+    image: service-b
+    container_name: service-b
+    ports:
+      - "38000:38000"
+    build: service-b/
+    depends_on:
+      - rabbitmq
+
+#  elasticsearch:
+#    restart: always
+#    build: elasticsearch/
+#    volumes:
+#      - $PWD/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+#    environment:
+#      ES_JAVA_OPTS: "-Xmx1024m -Xms256m"
+#    container_name: elk-es
+#
+#  logstash:
+#    restart: always
+#    build: logstash/
+#    volumes:
+#      - $PWD/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+#      - $PWD/logstash/pipeline:/usr/share/logstash/pipeline
+#    ports:
+#      - "9600:9600"
+#    environment:
+#      LS_JAVA_OPTS: "-Xmx1024m -Xms256m"
+#    container_name: elk-logstash
+#    depends_on:
+#      - elasticsearch
+#
+#  kibana:
+#    restart: always
+#    build: kibana/
+#    volumes:
+#      - $PWD/kibana/config/:/usr/share/kibana/config
+#    ports:
+#      - "5601:5601"
+#    container_name: elk-kibana
+#    depends_on:
+#      - elasticsearch

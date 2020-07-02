@@ -16,4 +16,4 @@ VOLUME /app/config
 
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar","/app/app.jar"]
 
-EXPOSE 38000
+EXPOSE 8080

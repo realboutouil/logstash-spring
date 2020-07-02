@@ -16,5 +16,4 @@ public class Controller {
         logger.info("Controller.hello(" + param + ")");
         return "Hello";
     }
-
 }

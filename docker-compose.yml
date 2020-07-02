@@ -17,14 +17,14 @@ services:
     image: service-a
     container_name: service-a
     ports:
-      - "39000:39000"
+      - "9090:9090"
     build: service-a/
 
   service-b:
     image: service-b
     container_name: service-b
     ports:
-      - "38000:38000"
+      - "8080:8080"
     build: service-b/
 
   elasticsearch:

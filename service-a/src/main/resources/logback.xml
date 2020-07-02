@@ -25,6 +25,7 @@
 
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <customFields>{"serviceName": "${serviceName}"}</customFields>
+            <customFields><![CDATA[ %logger{36} ]]></customFields>
         </encoder>
 
         <!-- RabbitMQ connection -->

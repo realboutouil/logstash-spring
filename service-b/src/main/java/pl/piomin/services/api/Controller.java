@@ -14,6 +14,10 @@ public class Controller {
     @RequestMapping("/hello/{param}")
     public String hello(@PathVariable("param") String param) {
         logger.info("Controller.hello(" + param + ")");
+        logger.info("Controller.hello(" + param + ")");
+        logger.warn("amine is not working");
+        logger.error("salah is not working");
+        logger.error("salah is not working");
         return "Hello";
     }
 

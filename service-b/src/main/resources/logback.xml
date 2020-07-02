@@ -13,7 +13,8 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                {"time": "%date{ISO8601}", "thread": "%thread", "level": "%level", "class": "%logger{36}", "message":"%message"}\n
+                {"time": "%date{ISO8601}", "thread": "%thread", "level": "%level", "class": "%logger{36}",
+                "message":"%message"}\n
             </pattern>
         </encoder>
     </appender>
@@ -21,11 +22,12 @@
     <appender name="AMQP"
               class="pl.piomin.services.api.AmqpLogbackAppender">
         <!-- layout is required but ignored as using the encoder for the AMQP message body -->
-        <layout><pattern><![CDATA[ %message ]]></pattern></layout>
+        <layout>
+            <pattern><![CDATA[ %message ]]></pattern>
+        </layout>
 
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <customFields>{"serviceName": "${serviceName}"}</customFields>
-            <customFields><![CDATA[ %logger{36} ]]></customFields>
         </encoder>
 
         <!-- RabbitMQ connection -->

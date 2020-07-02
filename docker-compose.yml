@@ -19,8 +19,6 @@ services:
     ports:
       - "39000:39000"
     build: service-a/
-    depends_on:
-      - rabbitmq
 
   service-b:
     image: service-b
@@ -28,8 +26,6 @@ services:
     ports:
       - "38000:38000"
     build: service-b/
-    depends_on:
-      - rabbitmq
 
 #  elasticsearch:
 #    restart: always

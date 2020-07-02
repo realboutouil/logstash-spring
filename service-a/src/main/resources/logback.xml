@@ -19,7 +19,7 @@
     </appender>
 
     <appender name="AMQP"
-              class="org.springframework.amqp.rabbit.logback.AmqpAppender">
+              class="pl.piomin.services.api.AmqpLogbackAppender">
         <layout>
             <pattern>
                 {

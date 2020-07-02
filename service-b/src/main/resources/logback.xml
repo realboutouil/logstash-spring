@@ -29,6 +29,7 @@
                 "level": "%level",
                 "class": "%logger{36}",
                 "message": "%message"
+                "serviceName": "${serviceName}"
                 }
             </pattern>
         </layout>

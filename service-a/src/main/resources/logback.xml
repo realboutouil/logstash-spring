@@ -13,8 +13,7 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                {"time": "%date{ISO8601}", "thread": "%thread", "level": "%level", "class": "%logger{36}", "message":
-                "%message"}\n
+                {"time": "%date{ISO8601}", "thread": "%thread", "level": "%level", "class": "%logger{36}", "message":"%message"}\n
             </pattern>
         </encoder>
     </appender>
